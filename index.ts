@@ -5,14 +5,16 @@ window.onload = () => {
   routeElements.forEach(routeElement => routeElement.addEventListener('click', pushEvent));
 }
 
-window.addEventListener("popstate", event => {
+window.addEventListener("popstate", popStateEvent);
+
+function popStateEvent(event: PopStateEvent): void {
   // Grab the history state id
   let stateId = event.state.id;
   // Visually select the clicked button/tab/box
   selectTab(stateId);
   // Load content for this tab/page
   loadContent(stateId);
-});
+}
 
 function pushEvent(event: MouseEvent): void {
   const target = event.target as HTMLElement;
@@ -25,7 +27,7 @@ function pushEvent(event: MouseEvent): void {
   // Load content for this tab/page
   loadContent(id);
   // Finally push state change to the address bar
-  window.history.pushState({id}, `${id}`, `/page/${id}`);
+  window.history.pushState({id}, `${id}`, `/${id}`);
 }
 
 function unselect(item: HTMLElement): void {
