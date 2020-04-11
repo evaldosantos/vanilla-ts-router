@@ -19,10 +19,21 @@ function pushEvent(event: MouseEvent): void {
   window.history.pushState({id}, `${id}`, `/page/${id}`);
 }
 
+function unselect(item: HTMLElement): void {
+  item.classList.remove('selected')
+}
+
+function select(item: HTMLElement): void {
+  item.classList.add('selected')
+}
+
 function selectTab(id: string): void {
-  console.log("select tab", id);
+  // remove selected class from all buttons
+  document.querySelectorAll(".route").forEach(unselect);
+  // select clicked element (visually)
+  document.querySelectorAll("#" + id).forEach(select);
 }
 
 function loadContent(id: string) {
-  console.log("loading content...", id);
+  document.querySelector("#content").innerHTML = 'Content loading for /' + id + '...';
 }
