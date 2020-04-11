@@ -5,6 +5,15 @@ window.onload = () => {
   routeElements.forEach(routeElement => routeElement.addEventListener('click', pushEvent));
 }
 
+window.addEventListener("popstate", event => {
+  // Grab the history state id
+  let stateId = event.state.id;
+  // Visually select the clicked button/tab/box
+  selectTab(stateId);
+  // Load content for this tab/page
+  loadContent(stateId);
+});
+
 function pushEvent(event: MouseEvent): void {
   const target = event.target as HTMLElement;
   // Get id attribute of the box or button or link clicked
